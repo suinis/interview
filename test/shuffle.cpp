@@ -7,7 +7,11 @@
 #include <chrono>
 #include <cstdlib>
 #include <iostream>
+#include <list>
+#include <queue>
 #include <random>
+#include <stack>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 #include <memory_resource>

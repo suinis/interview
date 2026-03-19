@@ -33,7 +33,7 @@ int main() {
                 if (to == father) continue;
                 dfs(to, from, cur ^ weight);
             }
-        };
+        }; 
         dfs(1, 0, 0);
 
         // 所有点对 (i,j) 且 i<j：path_xor(i,j) = xor[i]^xor[j]
@@ -66,3 +66,15 @@ int main() {
     }
     return 0;
 }
+
+
+/* 
+2
+2
+1 2 1
+2 3 1
+3
+1 2 0
+2 3 0
+3 4 7
+*/
