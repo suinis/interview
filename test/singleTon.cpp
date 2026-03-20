@@ -23,13 +23,18 @@ private:
 
 public:
     static SingleTon* getInstance() {
-        {// 第一次“无锁”读指针，只保证指针本身是原子的
-            SingleTon* tmp = instance.load(std::memory_order_relaxed);
-        // acquire 屏障：如果刚才读到的是已经发布过的指针，
-        // 那么之后访问对象时，能看到构造线程 release 之前的所有写
-            std::atomic_thread_fence(std::memory_order_acquire);
-        }
+        // {// 第一次“无锁”读指针，只保证指针本身是原子的
+        //     SingleTon* tmp = instance.load(std::memory_order_relaxed);
+        // // acquire 屏障：如果刚才读到的是已经发布过的指针，
+        // // 那么之后访问对象时，能看到构造线程 release 之前的所有写
+        //     std::atomic_thread_fence(std::memory_order_acquire);  // 跟其他线程的release写对应，实现同步
+        // }
         //等价于：
+
+        /* 
+            release 栅栏 + store 指针：钉住“先构造完、再发布指针”的顺序。
+            acquire 读指针：一旦读到非空，就和那次 release 同步，保证你后面用对象时，构造的写已经对你可见。
+        */
         SingleTon* tmp = instance.load(std::memory_order_acquire);
         if(tmp == nullptr) {
             std::lock_guard<std::mutex> lock(mtx);
