@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/suinis/projects/interview/test",
-      "program": "/home/suinis/projects/interview/test/build/Debug/outDebug",
+      "cwd": "/home/suinis/projects/interview/test/semaphore",
+      "program": "/home/suinis/projects/interview/test/semaphore/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
